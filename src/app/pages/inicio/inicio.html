@@ -1,0 +1,85 @@
+<div class="rain-container">
+  <div
+    *ngFor="let item of rainItems"
+    class="ingredient"
+    [style.left]="item.left"
+    [style.font-size]="item.size"
+    [style.animation-duration]="item.duration"
+    [style.animation-delay]="item.delay"
+  >{{ item.emoji }}</div>
+</div>
+
+<div class="page-center">
+  <div class="card">
+    <img src="icons/logo-pancho.png" class="card-logo" alt="logo"
+         onerror="this.style.display='none'">
+    <div class="card-title">
+      <span class="spark">✦</span>Panchito<span class="spark">✦</span>
+    </div>
+    <div class="card-subtitle">
+      Armá el pancho que quieras,<br>nosotros ponemos la Salchicha.
+    </div>
+
+    <!-- Ensamblado animado del pancho -->
+    <div class="pancho-stage">
+      <div class="pancho-layer layer-pan-top"    [class.show]="step >= 1"></div>
+      <div class="pancho-layer layer-salchicha"  [class.show]="step >= 2"></div>
+      <div class="pancho-layer layer-salsas"     [class.show]="step >= 3">
+        <div class="salsa-ketchup"></div>
+        <div class="salsa-mostaza"></div>
+      </div>
+      <div class="pancho-layer layer-extras"     [class.show]="step >= 4">
+        <img src="icons/pickles.png" class="extra-icon" alt="pickles" onerror="this.outerHTML='🥒'">
+        <img src="icons/cebolla.png" class="extra-icon" alt="cebolla" onerror="this.outerHTML='🧅'">
+        <img src="icons/ketchup.png" class="extra-icon" alt="ketchup" onerror="this.outerHTML='🫙'">
+      </div>
+      <div class="pancho-layer layer-pan-bottom" [class.show]="step >= 5"></div>
+    </div>
+
+    <!-- Steps indicadores -->
+    <div class="steps">
+      <div class="step" [class.active]="step >= 1">
+        <img src="icons/pan-clasico.png" class="step-icon-img" alt="pan" onerror="this.outerHTML='🍞'">
+        <span class="step-label">1 Pan</span>
+      </div>
+      <div class="step" [class.active]="step >= 2">
+        <img src="icons/salchicha-viena.png" class="step-icon-img" alt="salchicha" onerror="this.outerHTML='🌭'">
+        <span class="step-label">2 Salchicha</span>
+      </div>
+      <div class="step" [class.active]="step >= 3">
+        <img src="icons/ketchup.png" class="step-icon-img" alt="salsas" onerror="this.outerHTML='🍅'">
+        <span class="step-label">3 Salsas</span>
+      </div>
+      <div class="step" [class.active]="step >= 4">
+        <img src="icons/pickles.png" class="step-icon-img" alt="extras" onerror="this.outerHTML='🥗'">
+        <span class="step-label">4 Extras</span>
+      </div>
+      <div class="step" [class.active]="step >= 5">
+        <img src="icons/corazon.png" class="step-icon-img" alt="listo" onerror="this.outerHTML='❤️'">
+        <span class="step-label">5 ¡Listo!</span>
+      </div>
+    </div>
+
+    <div class="amor" [class.show]="step >= 5">
+      <img src="icons/corazon.png" class="amor-icon" alt="amor" onerror="this.outerHTML='❤️'">
+      Hecho con amor
+    </div>
+
+    <div class="btns">
+      <button class="btn btn-crear" routerLink="/crear">
+        <div class="water"></div>
+        <div class="label">
+          <img src="icons/crear.png" class="btn-icon" alt="crear" onerror="this.outerHTML='➕'">
+          Crear Pancho
+        </div>
+      </button>
+      <button class="btn btn-ver" routerLink="/menu">
+        <div class="water"></div>
+        <div class="label">
+          <img src="icons/menu.png" class="btn-icon" alt="menu" onerror="this.outerHTML='☰'">
+          Ver Menú
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
