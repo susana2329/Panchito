@@ -4,5 +4,4 @@ export interface Pancho {
   ingredientes: string;
   precio: number;
   tamaño: string;
-  disponible: boolean;
 }

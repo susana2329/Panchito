@@ -14,32 +14,22 @@
     </div>
 
     <div class="lista-panchos">
-
         <div class="fila-encabezado">
             <div>Nombre</div>
             <div>Ingredientes</div>
-            <div>Precio</div>
             <div>Tamaño</div>
-            <div>Disponibilidad</div>
-            <div>Acción</div>
+            <div class="txt-accion">Acción</div>
         </div>
 
         <div *ngFor="let pancho of panchos" class="fila">
             <div>{{ pancho.nombre }}</div>
             <div>{{ pancho.ingredientes }}</div>
-            <div>${{ pancho.precio }}</div>
             <div>{{ pancho.tamanio }}</div>
-            <div>
-                <span class="estado" [class.disponible]="pancho.disponible" [class.no-disponible]="!pancho.disponible">
-                    {{ obtenerEstado(pancho.disponible) }}
-                </span>
-            </div>
 
             <div class="acciones">
-                <button class="btn-editar">✏️ Editar</button>
-                <button class="btn-eliminar">🗑 Eliminar</button>
+                <button class="btn-editar" [routerLink]="['/editar', pancho.panchoId]">✏️ Editar</button>
+                <button class="btn-eliminar" (click)="eliminarPancho(pancho.panchoId)">🗑 Eliminar</button>
             </div>
         </div>
-
     </div>
 </div>

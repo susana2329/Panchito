@@ -13,7 +13,6 @@
     font-family: 'Nunito', sans-serif;
 }
 
-/* HEADER estilo compañera */
 .header {
     display: flex;
     align-items: center;
@@ -37,7 +36,6 @@
     font-weight: 600;
 }
 
-/* botón volver estilo compañera */
 .btn-back {
     width: 40px;
     height: 40px;
@@ -54,7 +52,6 @@
     transform: translateX(-3px);
 }
 
-/* panel */
 .menu {
     margin-bottom: 15px;
 }
@@ -65,12 +62,11 @@
     color: #2d1a0e;
 }
 
-/* tabla */
 .fila-encabezado,
 .fila {
     display: grid;
-    grid-template-columns: 1.5fr 2fr 1fr 1fr 1.2fr 1fr;
-    padding: 12px;
+    grid-template-columns: 2.2fr 3.5fr 1.5fr 2fr;
+    padding: 14px 20px;
     border-radius: 10px;
 }
 
@@ -80,64 +76,79 @@
     font-weight: 700;
 }
 
+.txt-accion {
+    text-align: center;
+}
+
 .fila {
     background: white;
     margin-top: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     align-items: center;
     transition: 0.2s;
+    border: 1px solid #f0f0f0;
 }
 
 .fila:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: scale(1.005);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* botones */
+.acciones {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
 .btn-editar {
     background: #4cafef;
     color: white;
     border: none;
-    padding: 8px 10px;
+    padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
 }
 
 .btn-editar:hover {
     background: #349fe0;
+    animation: strobe 0.5s infinite alternate;
 }
 
 .btn-eliminar {
     background: #C94831;
     color: white;
     border: none;
-    padding: 8px 10px;
+    padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .btn-eliminar:hover {
-    opacity: 0.85;
+    background: #b53b25;
+    animation: shake 0.3s infinite;
 }
 
-.estado {
-    padding: 6px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    display: inline-block;
+@keyframes strobe {
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 4px #4cafef;
+    }
+    100% {
+        opacity: 0.7;
+        box-shadow: 0 0 16px #4cafef;
+    }
 }
 
-.estado.disponible {
-    background: #d9f7df;
-    color: #1e7a33;
-    border: 1px solid #7ee29a;
-}
-
-.estado.no-disponible {
-    background: #fde2e2;
-    color: #a32626;
-    border: 1px solid #f29b9b;
+@keyframes shake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    20% { transform: translate(-2px, 1px) rotate(-1deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    60% { transform: translate(-2px, -1px) rotate(0deg); }
+    80% { transform: translate(2px, 1px) rotate(1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
 }
