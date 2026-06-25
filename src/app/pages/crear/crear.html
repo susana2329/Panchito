@@ -1,10 +1,10 @@
 <div class="page">
 
-  
+
   <div class="header">
     <button class="btn-back" routerLink="/">←</button>
     <div>
-      <h1 class="titulo">Crear Pancho</h1>
+      <h1 class="titulo">Crea el pancho de tus sueños</h1>
       <p class="subtitulo">Elegí tus ingredientes favoritos</p>
     </div>
   </div>
@@ -14,9 +14,27 @@
    
     <div class="panel-ingredientes">
 
-
+      
       <div class="seccion">
-        <h2 class="seccion-titulo">🍞 Tipo de Pan</h2>
+        <h2 class="seccion-titulo">
+          <img src="assets/icons/pancho.png" class="sec-icon" alt="nombre">
+          Nombre del Pancho
+        </h2>
+        <input
+          class="input-nombre"
+          type="text"
+          placeholder="Ej: Los mejores..."
+          [(ngModel)]="nombrePancho"
+          maxlength="30"
+        >
+      </div>
+
+   
+      <div class="seccion">
+        <h2 class="seccion-titulo">
+          <img src="assets/icons/pan-clasico.png" class="sec-icon" alt="pan">
+          Tipo de Pan
+        </h2>
         <div class="grid-opciones">
           <div
             *ngFor="let pan of panes"
@@ -32,8 +50,12 @@
         </div>
       </div>
 
+    
       <div class="seccion">
-        <h2 class="seccion-titulo">🌭 Salchicha</h2>
+        <h2 class="seccion-titulo">
+          <img src="assets/icons/salchicha-viena.png" class="sec-icon" alt="salchicha">
+          Salchicha
+        </h2>
         <div class="grid-opciones">
           <div
             *ngFor="let s of salchichas"
@@ -51,7 +73,10 @@
 
   
       <div class="seccion">
-        <h2 class="seccion-titulo">🍅 Salsas</h2>
+        <h2 class="seccion-titulo">
+          <img src="assets/icons/ketchup.png" class="sec-icon" alt="salsas">
+          Salsas
+        </h2>
         <div class="grid-opciones">
           <div
             *ngFor="let s of salsas"
@@ -67,8 +92,12 @@
         </div>
       </div>
 
+     
       <div class="seccion">
-        <h2 class="seccion-titulo">🥗 Extras</h2>
+        <h2 class="seccion-titulo">
+          <img src="assets/icons/pepino.png" class="sec-icon" alt="extras">
+          Extras
+        </h2>
         <div class="grid-opciones">
           <div
             *ngFor="let e of extras"
@@ -86,20 +115,27 @@
 
     </div>
 
-
+  
     <div class="panel-preview">
       <div class="preview-titulo">
-        <span class="spark">✦</span> Tu pancho <span class="spark">✦</span>
+        <span class="spark"></span> Tu pancho <span class="spark"></span>
       </div>
 
+  
+      <div class="nombre-preview" *ngIf="nombrePancho.trim()">
+        "{{ nombrePancho }}"
+      </div>
 
-      <div class="pancho-preview">
+   
+      <div class="pancho-preview" [class.girando]="estaGirando">
         <ng-container *ngIf="panSeleccionado || salchichaSeleccionada; else placeholder">
           <div class="prev-pan-top"
                [style.background]="'linear-gradient(180deg, ' + colorPan + ' 0%, #c8781a 100%)'">
           </div>
           <div class="prev-extras" *ngIf="extrasSeleccionadosLista.length > 0">
-            <span *ngFor="let e of extrasSeleccionadosLista" class="prev-extra-emoji">{{ e.emoji }}</span>
+            <img *ngFor="let e of extrasSeleccionadosLista"
+                 [src]="e.icono" class="prev-extra-icon" [alt]="e.nombre"
+                 (error)="onImgError($event, e.emoji)">
           </div>
           <div class="prev-salsas" *ngIf="salsasSeleccionadasLista.length > 0">
             <div *ngFor="let s of salsasSeleccionadasLista"
@@ -116,30 +152,42 @@
         </ng-container>
         <ng-template #placeholder>
           <div class="prev-placeholder">
-            <span style="font-size: 32px">👆</span>
+            <img src="assets/icons/pancho2.png" class="placeholder-img" alt="pancho">
             <span>Elegí ingredientes</span>
           </div>
         </ng-template>
       </div>
 
- 
+     
       <div class="ingredientes-seleccionados" *ngIf="puedeGuardar">
-        <div class="tag" *ngIf="panSeleccionado">{{ panSeleccionado.emoji }} {{ panSeleccionado.nombre }}</div>
-        <div class="tag" *ngIf="salchichaSeleccionada">{{ salchichaSeleccionada.emoji }} {{ salchichaSeleccionada.nombre }}</div>
-        <div class="tag" *ngFor="let s of salsasSeleccionadasLista">{{ s.emoji }} {{ s.nombre }}</div>
-        <div class="tag" *ngFor="let e of extrasSeleccionadosLista">{{ e.emoji }} {{ e.nombre }}</div>
+        <div class="tag" *ngIf="panSeleccionado">
+          <img [src]="panSeleccionado.icono" class="tag-icon" [alt]="panSeleccionado.nombre">
+          {{ panSeleccionado.nombre }}
+        </div>
+        <div class="tag" *ngIf="salchichaSeleccionada">
+          <img [src]="salchichaSeleccionada.icono" class="tag-icon" [alt]="salchichaSeleccionada.nombre">
+          {{ salchichaSeleccionada.nombre }}
+        </div>
+        <div class="tag" *ngFor="let s of salsasSeleccionadasLista">
+          <img [src]="s.icono" class="tag-icon" [alt]="s.nombre">
+          {{ s.nombre }}
+        </div>
+        <div class="tag" *ngFor="let e of extrasSeleccionadosLista">
+          <img [src]="e.icono" class="tag-icon" [alt]="e.nombre">
+          {{ e.nombre }}
+        </div>
       </div>
 
-     
       <button
         class="btn-guardar"
         [class.disabled]="!puedeGuardar"
         [disabled]="!puedeGuardar"
         (click)="guardar()"
       >
-        💾 Guardar Pancho
+        <img src="assets/icons/pancho.png" class="btn-icon" alt="guardar">
+        Guardar Pancho
       </button>
-      <p class="hint" *ngIf="!puedeGuardar">Elegí pan y salchicha para continuar</p>
+      <p class="hint" *ngIf="!puedeGuardar">Completá el nombre, pan y salchicha</p>
     </div>
 
   </div>

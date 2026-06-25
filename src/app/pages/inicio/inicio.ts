@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 interface RainItem {
-  emoji: string; left: string; size: string; duration: string; delay: string;
+  icono: string;
+  nombre: string;
+  left: string;
+  size: string;
+  duration: string;
+  delay: string;
 }
 
 @Component({
@@ -14,7 +19,22 @@ interface RainItem {
   styleUrls: ['./inicio.css']
 })
 export class InicioComponent implements OnInit, OnDestroy {
-  readonly rainEmojis = ['🍅','🥒','🧅','🧀','🌶️','🥬','🫙','🧄','🫒','🍋','🥚','🌿'];
+
+  readonly iconosLluvia = [
+    { icono: 'assets/icons/tomate.png',    nombre: 'tomate' },
+    { icono: 'assets/icons/pepino.png',    nombre: 'pepino' },
+    { icono: 'assets/icons/cebolla.png',   nombre: 'cebolla' },
+    { icono: 'assets/icons/queso.png',     nombre: 'queso' },
+    { icono: 'assets/icons/picante.png',   nombre: 'picante' },
+    { icono: 'assets/icons/lechuga.png',   nombre: 'lechuga' },
+    { icono: 'assets/icons/ketchup.png',   nombre: 'ketchup' },
+    { icono: 'assets/icons/ajo.png',       nombre: 'ajo' },
+    { icono: 'assets/icons/aceitunas.png', nombre: 'aceitunas' },
+    { icono: 'assets/icons/huevo.png',     nombre: 'huevo' },
+    { icono: 'assets/icons/mayonesa.png',  nombre: 'mayonesa' },
+    { icono: 'assets/icons/palta.png',     nombre: 'palta' },
+  ];
+
   rainItems: RainItem[] = [];
   step = 0;
   private rainInterval!: ReturnType<typeof setInterval>;
@@ -28,7 +48,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     this.rainInterval = setInterval(() => {
       this.addRainItem();
       if (this.rainItems.length > 40) this.rainItems.splice(0, 10);
-    }, 400);
+    }, 500);
     this.runAssembly();
     this.assemblyInterval = setInterval(() => this.runAssembly(), 7000);
   }
@@ -40,12 +60,14 @@ export class InicioComponent implements OnInit, OnDestroy {
   }
 
   addRainItem() {
+    const base = this.iconosLluvia[Math.floor(Math.random() * this.iconosLluvia.length)];
     this.rainItems.push({
-      emoji:    this.rainEmojis[Math.floor(Math.random() * this.rainEmojis.length)],
+      icono:    base.icono,
+      nombre:   base.nombre,
       left:     `${Math.random() * 100}vw`,
-      size:     `${20 + Math.random() * 20}px`,
-      duration: `${4 + Math.random() * 5}s`,
-      delay:    `${Math.random() * 2}s`,
+      size:     `${28 + Math.random() * 24}px`,
+      duration: `${5 + Math.random() * 5}s`,
+      delay:    `${Math.random() * 3}s`,
     });
   }
 
