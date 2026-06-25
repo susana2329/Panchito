@@ -259,7 +259,6 @@
 }
 .input-nombre::placeholder { color: #b09070; }
 
-/* ── Nombre en preview ── */
 .nombre-preview {
   font-family: 'Fredoka One', cursive;
   font-size: 16px;

@@ -24,27 +24,27 @@ export class CrearComponent {
   nombrePancho: string = '';
 
   panes: Opcion[] = [
-    { id: 'clasico',  nombre: 'Clásico',  icono: 'assets/icons/pan-clasico.png',  emoji: '🍞', color: '#e8a020' },
-    { id: 'integral', nombre: 'Integral', icono: 'assets/icons/pan-integral.png', emoji: '🌾', color: '#8B6914' },
-    { id: 'brioche',  nombre: 'Brioche',  icono: 'assets/icons/pan-brioche.png',  emoji: '🥐', color: '#f0c060' },
+    { id: 'clasico',  nombre: 'Clásico',  icono: 'assets/icons/pan-clasico.png',  emoji: 'icon cargando', color: '#e8a020' },
+    { id: 'integral', nombre: 'Integral', icono: 'assets/icons/pan-integraal.png', emoji: 'icon cargando', color: '#8B6914' },
+    { id: 'brioche',  nombre: 'Brioche',  icono: 'assets/icons/pan-brioche.png',  emoji: 'icon cargando', color: '#f0c060' },
   ];
 
   salchichas: Opcion[] = [
-    { id: 'viena', nombre: 'Viena', icono: 'assets/icons/salchicha-viena.png', emoji: '🌭', color: '#c0392b' },
-    { id: 'cerdo', nombre: 'Cerdo', icono: 'assets/icons/salchicha-cerdo.png', emoji: '🥩', color: '#962d22' },
-    { id: 'pollo', nombre: 'Pollo', icono: 'assets/icons/salchicha-pollo.png', emoji: '🍗', color: '#d4a017' },
+    { id: 'viena', nombre: 'Viena', icono: 'assets/icons/salchicha-viena.png', emoji: 'icon cargando', color: '#c0392b' },
+    { id: 'cerdo', nombre: 'Cerdo', icono: 'assets/icons/salchicha-cerdo.png', emoji: 'icon cargando', color: '#962d22' },
+    { id: 'pollo', nombre: 'Pollo', icono: 'assets/icons/salchicha-pollo.png', emoji: 'icon cargando', color: '#d4a017' },
   ];
 
   salsas: Opcion[] = [
-    { id: 'ketchup',  nombre: 'Ketchup',  icono: 'assets/icons/ketchup.png',  emoji: '🍅', color: '#e74c3c' },
-    { id: 'mostaza',  nombre: 'Mostaza',  icono: 'assets/icons/mostaza.png',  emoji: '🟡', color: '#FAC748' },
-    { id: 'mayonesa', nombre: 'Mayonesa', icono: 'assets/icons/mayonesa.png', emoji: '⚪', color: '#f5f0dc' },
+    { id: 'ketchup',  nombre: 'Ketchup',  icono: 'assets/icons/ketchup.png',  emoji: 'icon cargando', color: '#e74c3c' },
+    { id: 'mostaza',  nombre: 'Mostaza',  icono: 'assets/icons/mostaza.png',  emoji: 'icon cargando', color: '#FAC748' },
+    { id: 'mayonesa', nombre: 'Mayonesa', icono: 'assets/icons/mayonesa.png', emoji: 'icon cargando', color: '#f5f0dc' },
   ];
 
   extras: Opcion[] = [
-    { id: 'queso',    nombre: 'Cheddar',   icono: 'assets/icons/queso.png',   emoji: '🧀' },
-    { id: 'pepino',   nombre: 'Pickles',   icono: 'assets/icons/pepino.png',  emoji: '🥒' },
-    { id: 'cebolla',  nombre: 'Cebolla',   icono: 'assets/icons/cebolla.png', emoji: '🧅' },
+    { id: 'queso',    nombre: 'Cheddar',   icono: 'assets/icons/queso.png',   emoji: 'icon cargando' },
+    { id: 'pepino',   nombre: 'Pickles',   icono: 'assets/icons/pepino.png',  emoji: 'icon cargando' },
+    { id: 'cebolla',  nombre: 'Cebolla',   icono: 'assets/icons/cebolla.png', emoji: 'icon cargando' },
     { id: 'palta',    nombre: 'Palta',     icono: 'assets/icons/palta.png',   emoji: '🥑' },
     { id: 'lechuga',  nombre: 'Lechuga',   icono: 'assets/icons/lechuga.png', emoji: '🥬' },
     { id: 'tomate',   nombre: 'Tomate',    icono: 'assets/icons/tomate.png',  emoji: '🍅' },
