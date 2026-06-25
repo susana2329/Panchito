@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    min-height: 100vh;
+    background: #fff;
+    padding: 30px;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* HEADER estilo compañera */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 28px 12px;
+    background: #E7DEAD;
+    border-bottom: 2px solid rgba(201,72,49,0.1);
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.titulo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 26px;
+    color: #2d1a0e;
+}
+
+.subtitulo {
+    font-size: 13px;
+    color: #6b4226;
+    font-weight: 600;
+}
+
+/* botón volver estilo compañera */
+.btn-back {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.15s;
+}
+
+.btn-back:hover {
+    transform: translateX(-3px);
+}
+
+/* panel */
+.menu {
+    margin-bottom: 15px;
+}
+
+.panel-titulo {
+    font-size: 16px;
+    font-weight: 800;
+    color: #2d1a0e;
+}
+
+/* tabla */
+.fila-encabezado,
+.fila {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr 1fr 1fr 1.2fr 1fr;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.fila-encabezado {
+    background: #2d1a0e;
+    color: white;
+    font-weight: 700;
+}
+
+.fila {
+    background: white;
+    margin-top: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    align-items: center;
+    transition: 0.2s;
+}
+
+.fila:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* botones */
+.btn-editar {
+    background: #4cafef;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-editar:hover {
+    background: #349fe0;
+}
+
+.btn-eliminar {
+    background: #C94831;
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-eliminar:hover {
+    opacity: 0.85;
+}
+
+.estado {
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.estado.disponible {
+    background: #d9f7df;
+    color: #1e7a33;
+    border: 1px solid #7ee29a;
+}
+
+.estado.no-disponible {
+    background: #fde2e2;
+    color: #a32626;
+    border: 1px solid #f29b9b;
+}

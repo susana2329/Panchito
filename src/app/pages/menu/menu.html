@@ -1,1 +1,45 @@
-<p>menu works!</p>
+<div class="page">
+    <div class="header">
+        <button class="btn-back" routerLink="/">←</button>
+        <div>
+            <h1 class="titulo">Bienvenido al Menú de Panchito</h1>
+            <p class="subtitulo">Gestioná los panchos registrados</p>
+        </div>
+    </div>
+
+    <div class="contenido">
+        <div class="menu">
+            <h2 class="panel-titulo">🌭 Panchitos Registrados </h2>
+        </div>
+    </div>
+
+    <div class="lista-panchos">
+
+        <div class="fila-encabezado">
+            <div>Nombre</div>
+            <div>Ingredientes</div>
+            <div>Precio</div>
+            <div>Tamaño</div>
+            <div>Disponibilidad</div>
+            <div>Acción</div>
+        </div>
+
+        <div *ngFor="let pancho of panchos" class="fila">
+            <div>{{ pancho.nombre }}</div>
+            <div>{{ pancho.ingredientes }}</div>
+            <div>${{ pancho.precio }}</div>
+            <div>{{ pancho.tamanio }}</div>
+            <div>
+                <span class="estado" [class.disponible]="pancho.disponible" [class.no-disponible]="!pancho.disponible">
+                    {{ obtenerEstado(pancho.disponible) }}
+                </span>
+            </div>
+
+            <div class="acciones">
+                <button class="btn-editar">✏️ Editar</button>
+                <button class="btn-eliminar">🗑 Eliminar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
