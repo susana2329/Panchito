@@ -28,7 +28,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     { icono: 'assets/icons/picante.png',   nombre: 'picante' },
     { icono: 'assets/icons/lechuga.png',   nombre: 'lechuga' },
     { icono: 'assets/icons/ketchup.png',   nombre: 'ketchup' },
-    { icono: 'assets/icons/ajo.png',       nombre: 'ajo' },
+    { icono: 'assets/icons/ajoo.png',       nombre: 'ajo' },
     { icono: 'assets/icons/aceitunas.png', nombre: 'aceitunas' },
     { icono: 'assets/icons/huevo.png',     nombre: 'huevo' },
     { icono: 'assets/icons/mayonesa.png',  nombre: 'mayonesa' },

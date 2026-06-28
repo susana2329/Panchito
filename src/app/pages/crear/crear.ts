@@ -25,7 +25,7 @@ export class CrearComponent {
 
   panes: Opcion[] = [
     { id: 'clasico',  nombre: 'Clásico',  icono: 'assets/icons/pan-clasico.png',  emoji: 'icon cargando', color: '#e8a020' },
-    { id: 'integral', nombre: 'Integral', icono: 'assets/icons/pan-integraal.png', emoji: 'icon cargando', color: '#8B6914' },
+    { id: 'integral', nombre: 'Integral', icono: 'assets/icons/pan-integral.png', emoji: 'icon cargando', color: '#8B6914' },
     { id: 'brioche',  nombre: 'Brioche',  icono: 'assets/icons/pan-brioche.png',  emoji: 'icon cargando', color: '#f0c060' },
   ];
 
@@ -43,7 +43,7 @@ export class CrearComponent {
 
   extras: Opcion[] = [
     { id: 'queso',    nombre: 'Cheddar',   icono: 'assets/icons/queso.png',   emoji: 'icon cargando' },
-    { id: 'pepino',   nombre: 'Pickles',   icono: 'assets/icons/pepino.png',  emoji: 'icon cargando' },
+    { id: 'pepino',   nombre: 'Pepino',   icono: 'assets/icons/pepino.png',  emoji: 'icon cargando' },
     { id: 'cebolla',  nombre: 'Cebolla',   icono: 'assets/icons/cebolla.png', emoji: 'icon cargando' },
     { id: 'palta',    nombre: 'Palta',     icono: 'assets/icons/palta.png',   emoji: '🥑' },
     { id: 'lechuga',  nombre: 'Lechuga',   icono: 'assets/icons/lechuga.png', emoji: '🥬' },
