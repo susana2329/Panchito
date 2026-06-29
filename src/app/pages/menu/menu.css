@@ -45,7 +45,7 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.10);
     cursor: pointer;
     font-size: 16px;
-    transition: transform 0.15s;
+    transition: transform 0.15s ease;
 }
 
 .btn-back:hover {
@@ -76,22 +76,22 @@
     font-weight: 700;
 }
 
-.txt-accion {
-    text-align: center;
-}
-
 .fila {
     background: white;
     margin-top: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     align-items: center;
-    transition: 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: 1px solid #f0f0f0;
 }
 
 .fila:hover {
-    transform: scale(1.005);
+    transform: scale(1.01);
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.txt-accion {
+    text-align: center;
 }
 
 .acciones {
@@ -100,55 +100,147 @@
     justify-content: center;
 }
 
-.btn-editar {
-    background: #4cafef;
-    color: white;
+.btn-editar,
+.btn-eliminar {
     border: none;
     padding: 8px 14px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
-    text-decoration: none;
 }
 
-.btn-editar:hover {
-    background: #349fe0;
-    animation: strobe 0.5s infinite alternate;
+.btn-editar {
+    background: #4cafef;
+    color: white;
 }
 
 .btn-eliminar {
     background: #C94831;
     color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
 }
 
+.btn-editar:hover,
 .btn-eliminar:hover {
-    background: #b53b25;
-    animation: shake 0.3s infinite;
+    transform: scale(1.05);
 }
 
-@keyframes strobe {
-    0% {
-        opacity: 1;
-        box-shadow: 0 0 4px #4cafef;
-    }
-    100% {
-        opacity: 0.7;
-        box-shadow: 0 0 16px #4cafef;
-    }
+.contenido input[type="text"] {
+    width: 100%;
+    max-width: 320px;
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+    margin-bottom: 25px;
 }
 
-@keyframes shake {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    20% { transform: translate(-2px, 1px) rotate(-1deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    60% { transform: translate(-2px, -1px) rotate(0deg); }
-    80% { transform: translate(2px, 1px) rotate(1deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
+.contenido input[type="text"]:focus {
+    border-color: #888;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.4);
+    text-align: center;
+    max-width: 400px;
+    width: 85%;
+    animation: scaleUp 0.2s ease-out;
+}
+
+.modal-img {
+    width: 110px;
+    margin: 0 auto 15px;
+    display: block;
+}
+
+.modal-card h2 {
+    font-family: 'Fredoka One', cursive;
+    color: #2d1a0e;
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.modal-card p {
+    font-family: 'Nunito', sans-serif;
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-confirmar-modal,
+.btn-cancelar-modal {
+    flex: 1;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+}
+
+.btn-confirmar-modal {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-cancelar-modal {
+    background: #6c757d;
+    color: white;
+}
+
+.toast-exito {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2d1a0e;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    font-weight: 600;
+    z-index: 9999;
+    animation: toastIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
