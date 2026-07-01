@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PanchosService } from '../../services/panchitos.service';
 
 interface Opcion {
   id: string;
@@ -18,15 +19,16 @@ interface Opcion {
   templateUrl: './crear.html',
   styleUrls: ['./crear.css']
 })
+
 export class CrearComponent {
 
- 
+
   nombrePancho: string = '';
 
   panes: Opcion[] = [
-    { id: 'clasico',  nombre: 'Clásico',  icono: 'assets/icons/pan-clasico.png',  emoji: 'icon cargando', color: '#e8a020' },
+    { id: 'clasico', nombre: 'Clásico', icono: 'assets/icons/pan-clasico.png', emoji: 'icon cargando', color: '#e8a020' },
     { id: 'integral', nombre: 'Integral', icono: 'assets/icons/pan-integral.png', emoji: 'icon cargando', color: '#8B6914' },
-    { id: 'brioche',  nombre: 'Brioche',  icono: 'assets/icons/pan-brioche.png',  emoji: 'icon cargando', color: '#f0c060' },
+    { id: 'brioche', nombre: 'Brioche', icono: 'assets/icons/pan-brioche.png', emoji: 'icon cargando', color: '#f0c060' },
   ];
 
   salchichas: Opcion[] = [
@@ -36,28 +38,28 @@ export class CrearComponent {
   ];
 
   salsas: Opcion[] = [
-    { id: 'ketchup',  nombre: 'Ketchup',  icono: 'assets/icons/ketchup.png',  emoji: 'icon cargando', color: '#e74c3c' },
-    { id: 'mostaza',  nombre: 'Mostaza',  icono: 'assets/icons/mostaza.png',  emoji: 'icon cargando', color: '#FAC748' },
+    { id: 'ketchup', nombre: 'Ketchup', icono: 'assets/icons/ketchup.png', emoji: 'icon cargando', color: '#e74c3c' },
+    { id: 'mostaza', nombre: 'Mostaza', icono: 'assets/icons/mostaza.png', emoji: 'icon cargando', color: '#FAC748' },
     { id: 'mayonesa', nombre: 'Mayonesa', icono: 'assets/icons/mayonesa.png', emoji: 'icon cargando', color: '#f5f0dc' },
   ];
 
   extras: Opcion[] = [
-    { id: 'queso',    nombre: 'Cheddar',   icono: 'assets/icons/queso.png',   emoji: 'icon cargando' },
-    { id: 'pepino',   nombre: 'Pepino',   icono: 'assets/icons/pepino.png',  emoji: 'icon cargando' },
-    { id: 'cebolla',  nombre: 'Cebolla',   icono: 'assets/icons/cebolla.png', emoji: 'icon cargando' },
-    { id: 'palta',    nombre: 'Palta',     icono: 'assets/icons/palta.png',   emoji: '🥑' },
-    { id: 'lechuga',  nombre: 'Lechuga',   icono: 'assets/icons/lechuga.png', emoji: '🥬' },
-    { id: 'tomate',   nombre: 'Tomate',    icono: 'assets/icons/tomate.png',  emoji: '🍅' },
-    { id: 'berenjena',nombre: 'Berenjena', icono: 'assets/icons/berenjena.png',emoji: '🍆' },
-    { id: 'huevo',    nombre: 'Huevo',     icono: 'assets/icons/huevo.png',   emoji: '🥚' },
-    { id: 'aceitunas',nombre: 'Aceitunas', icono: 'assets/icons/aceitunas.png',emoji: '🫒' },
-    { id: 'picante',  nombre: 'Picante',   icono: 'assets/icons/picante.png', emoji: '🌶️' },
+    { id: 'queso', nombre: 'Cheddar', icono: 'assets/icons/queso.png', emoji: 'icon cargando' },
+    { id: 'pepino', nombre: 'Pepino', icono: 'assets/icons/pepino.png', emoji: 'icon cargando' },
+    { id: 'cebolla', nombre: 'Cebolla', icono: 'assets/icons/cebolla.png', emoji: 'icon cargando' },
+    { id: 'palta', nombre: 'Palta', icono: 'assets/icons/palta.png', emoji: 'icon cargando' },
+    { id: 'lechuga', nombre: 'Lechuga', icono: 'assets/icons/lechuga.png', emoji: 'icon cargando' },
+    { id: 'tomate', nombre: 'Tomate', icono: 'assets/icons/tomate.png', emoji: 'icon cargando' },
+    { id: 'berenjena', nombre: 'Berenjena', icono: 'assets/icons/berenjena.png', emoji: 'icon cargando' },
+    { id: 'huevo', nombre: 'Huevo', icono: 'assets/icons/huevo.png', emoji: 'icon cargando' },
+    { id: 'aceitunas', nombre: 'Aceitunas', icono: 'assets/icons/aceitunas.png', emoji: 'icon cargando' },
+    { id: 'picante', nombre: 'Picante', icono: 'assets/icons/picante.png', emoji: 'icon cargando' },
   ];
 
-  panSeleccionado:       Opcion | null = null;
+  panSeleccionado: Opcion | null = null;
   salchichaSeleccionada: Opcion | null = null;
-  salsasSeleccionadas:   Set<string> = new Set();
-  extrasSeleccionados:   Set<string> = new Set();
+  salsasSeleccionadas: Set<string> = new Set();
+  extrasSeleccionados: Set<string> = new Set();
 
   onImgError(event: Event, emoji: string) {
     const img = event.target as HTMLImageElement;
@@ -91,7 +93,7 @@ export class CrearComponent {
     return set.has(id);
   }
 
-  get colorPan()       { return this.panSeleccionado?.color       || '#e8a020'; }
+  get colorPan() { return this.panSeleccionado?.color || '#e8a020'; }
   get colorSalchicha() { return this.salchichaSeleccionada?.color || '#c0392b'; }
 
   get salsasSeleccionadasLista(): Opcion[] {
@@ -102,32 +104,53 @@ export class CrearComponent {
     return this.extras.filter(e => this.extrasSeleccionados.has(e.id));
   }
   get estaGirando(): boolean {
-  return !this.panSeleccionado
-    && !this.salchichaSeleccionada
-    && this.salsasSeleccionadas.size === 0
-    && this.extrasSeleccionados.size === 0;
-}
+    return !this.panSeleccionado
+      && !this.salchichaSeleccionada
+      && this.salsasSeleccionadas.size === 0
+      && this.extrasSeleccionados.size === 0;
+  }
 
   get puedeGuardar() {
-    return this.nombrePancho.trim() && this.panSeleccionado && this.salchichaSeleccionada;
-  }
+  return this.nombrePancho.trim() &&
+         this.panSeleccionado &&
+         this.salchichaSeleccionada;
+}
 
-  guardar() {
-    if (!this.puedeGuardar) return;
-    const pancho = {
-      nombre:       this.nombrePancho.trim(),
-      pan:          this.panSeleccionado!.id,
-      salchicha:    this.salchichaSeleccionada!.id,
-      ingredientes: [
-        ...Array.from(this.salsasSeleccionadas),
-        ...Array.from(this.extrasSeleccionados)
-      ].join(', '),
-      precio:     0,
-      tamano:     'Mediano',
-      disponible: true,
-    };
-    console.log('Pancho a crear:', pancho);
-   
-    alert(`¡"${pancho.nombre}" guardado! (conectar con API Gateway)`);
-  }
+constructor(private panchosService: PanchosService) {}
+
+guardar() {
+
+  if (!this.puedeGuardar) return;
+
+  const pancho = {
+    nombre: this.nombrePancho.trim(),
+    pan: this.panSeleccionado!.id,
+    salchicha: this.salchichaSeleccionada!.id,
+    ingredientes: [
+      ...Array.from(this.salsasSeleccionadas),
+      ...Array.from(this.extrasSeleccionados)
+    ].join(', '),
+    precio: 0,
+    tamaño: 'Mediano',
+    disponible: true,
+  };
+
+  this.panchosService.crearPancho(pancho).subscribe({
+    next: () => {
+      alert(`¡"${pancho.nombre}" creado con éxito!`);
+
+      this.nombrePancho = '';
+      this.panSeleccionado = null;
+      this.salchichaSeleccionada = null;
+      this.salsasSeleccionadas.clear();
+      this.extrasSeleccionados.clear();
+    },
+
+    error: (err: any) => {
+      console.error(err);
+      alert('Error al guardar el pancho. Revisá la consola.');
+    }
+  });
+}
+
 }
