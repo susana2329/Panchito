@@ -1,14 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
-interface Pancho {
-  panchoId: string;
-  nombre: string;
-  ingredientes: string;
-  tamanio: string;
-}
+import { PanchosService } from '../../services/panchitos.service';
 
 @Component({
   selector: 'app-menu',
@@ -17,37 +11,53 @@ interface Pancho {
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
 
-  panchos: Pancho[] = [
-    { panchoId: '1', nombre: 'Pancho Clásico', ingredientes: 'Ketchup, Mostaza', tamanio: 'Mediano' },
-    { panchoId: '2', nombre: 'Pancho Especial', ingredientes: 'Cheddar, Cebolla, Papas Pay', tamanio: 'Grande' },
-    { panchoId: '3', nombre: 'Pancho Premium', ingredientes: 'Cheddar, Pickles, Tomate', tamanio: 'XL' },
-    { panchoId: '4', nombre: 'Panchooooo', ingredientes: 'Cheddar, Pickles, Tomate', tamanio: 'XS' },
-    { panchoId: '5', nombre: 'PanchoOOOTEE', ingredientes: 'Cheddar, Pickles, Tomate', tamanio: 'XXXL' },
-    { panchoId: '6', nombre: 'Panchote', ingredientes: 'Cheddar, Pickles, Tomate', tamanio: 'XXL' },
-    { panchoId: '7', nombre: 'PanchoRizo', ingredientes: 'Cheddar, Pickles, Tomate', tamanio: 'M' }
-  ];
-
+  panchos: any[] = [];
   buscarPancho = '';
+  cargando = true;
+  errorCarga = false;
 
   mostrarAlertaDelete = false;
   mostrarToast = false;
-
   panchoSeleccionadoId: string | null = null;
   panchoSeleccionadoNombre = '';
   nombreEliminado = '';
-
   private toastTimeout?: ReturnType<typeof setTimeout>;
 
-  constructor(private router: Router) {}
+  constructor(private panchosService: PanchosService, private router: Router) {}
 
-  get panchosFiltrados(): Pancho[] {
+  ngOnInit() { this.cargarPanchos(); }
+
+  cargarPanchos() {
+    this.cargando = true;
+    this.errorCarga = false;
+    this.panchosService.listarPanchos().subscribe({
+      next: (res: any) => {
+        this.panchos = res.panchos;
+        this.cargando = false;
+      },
+      error: (err: any) => {
+        console.error('Error al cargar panchos:', err);
+        this.errorCarga = true;
+        this.cargando = false;
+      }
+    });
+  }
+
+  tamanoTexto(tamano: string): string {
+    const cm = parseInt(tamano);
+    if (isNaN(cm)) return tamano;
+    if (cm <= 10) return 'Muy chico';
+    if (cm <= 15) return 'Chico';
+    if (cm <= 20) return 'Mediano';
+    if (cm <= 25) return 'Grande';
+    return 'Muy grande';
+  }
+
+  get panchosFiltrados(): any[] {
     const filtro = this.buscarPancho.toLowerCase();
-
-    return this.panchos.filter(p =>
-      p.nombre.toLowerCase().includes(filtro)
-    );
+    return this.panchos.filter(p => p.nombre.toLowerCase().includes(filtro));
   }
 
   abrirConfirmacion(id: string, nombre: string): void {
@@ -64,30 +74,24 @@ export class MenuComponent {
 
   confirmarEliminar(): void {
     if (!this.panchoSeleccionadoId) return;
-
     this.nombreEliminado = this.panchoSeleccionadoNombre;
-
-    this.panchos = this.panchos.filter(
-      p => p.panchoId !== this.panchoSeleccionadoId
-    );
-
-    this.cerrarAlerta();
-    this.mostrarToastControlado();
+    this.panchosService.borrarPancho(this.panchoSeleccionadoId).subscribe({
+      next: () => {
+        this.panchos = this.panchos.filter(p => p.panchoId !== this.panchoSeleccionadoId);
+        this.cerrarAlerta();
+        this.mostrarToastControlado();
+      },
+      error: (err: any) => {
+        console.error('Error al eliminar:', err);
+        alert('Error al eliminar el pancho');
+        this.cerrarAlerta();
+      }
+    });
   }
 
   private mostrarToastControlado(): void {
     this.mostrarToast = true;
-
-    if (this.toastTimeout) {
-      clearTimeout(this.toastTimeout);
-    }
-
-    this.toastTimeout = setTimeout(() => {
-      this.mostrarToast = false;
-    }, 1500);
-  }
-
-  editarPancho(pancho: Pancho): void {
-    this.router.navigate(['/editar-pancho', pancho.panchoId]);
+    if (this.toastTimeout) clearTimeout(this.toastTimeout);
+    this.toastTimeout = setTimeout(() => { this.mostrarToast = false; }, 2500);
   }
 }

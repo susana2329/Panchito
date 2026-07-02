@@ -1,154 +1,100 @@
 <div class="page">
-
-
   <div class="header">
     <button class="btn-back" routerLink="/menu">←</button>
     <div>
       <h1 class="titulo">Edita tu Panchito</h1>
-      <p class="subtitulo">Elegí tus ingredientes favoritos</p>
+      <p class="subtitulo">Modificá tus ingredientes favoritos</p>
     </div>
   </div>
 
   <div class="contenido">
-
-   
     <div class="panel-ingredientes">
-
       
       <div class="seccion">
         <h2 class="seccion-titulo">
           <img src="assets/icons/pancho.png" class="sec-icon" alt="nombre">
           Nombre del Pancho
         </h2>
-        <input
-          class="input-nombre"
-          type="text"
-          placeholder="Ej: Los mejores..."
-          [(ngModel)]="nombrePancho"
-          maxlength="30"
-        >
+        <input class="input-nombre" type="text" placeholder="Ej: Los mejores..." [(ngModel)]="nombrePancho" maxlength="30">
       </div>
 
-   
       <div class="seccion">
         <h2 class="seccion-titulo">
           <img src="assets/icons/pan-clasico.png" class="sec-icon" alt="pan">
           Tipo de Pan
         </h2>
         <div class="grid-opciones">
-          <div
-            *ngFor="let pan of panes"
-            class="opcion"
-            [class.seleccionado]="panSeleccionado?.id === pan.id"
-            (click)="seleccionarPan(pan)"
-          >
-            <img [src]="pan.icono" class="opcion-icon" [alt]="pan.nombre"
-                 (error)="onImgError($event, pan.emoji)">
+          <div *ngFor="let pan of panes" class="opcion" [class.seleccionado]="panSeleccionado?.id === pan.id" (click)="seleccionarPan(pan)">
+            <img [src]="pan.icono" class="opcion-icon" [alt]="pan.nombre" (error)="onImgError($event, pan.emoji)">
             <span class="opcion-nombre">{{ pan.nombre }}</span>
             <div class="check" *ngIf="panSeleccionado?.id === pan.id">✓</div>
           </div>
         </div>
       </div>
 
-    
       <div class="seccion">
         <h2 class="seccion-titulo">
           <img src="assets/icons/salchicha-viena.png" class="sec-icon" alt="salchicha">
           Salchicha
         </h2>
         <div class="grid-opciones">
-          <div
-            *ngFor="let s of salchichas"
-            class="opcion"
-            [class.seleccionado]="salchichaSeleccionada?.id === s.id"
-            (click)="seleccionarSalchicha(s)"
-          >
-            <img [src]="s.icono" class="opcion-icon" [alt]="s.nombre"
-                 (error)="onImgError($event, s.emoji)">
+          <div *ngFor="let s of salchichas" class="opcion" [class.seleccionado]="salchichaSeleccionada?.id === s.id" (click)="seleccionarSalchicha(s)">
+            <img [src]="s.icono" class="opcion-icon" [alt]="s.nombre" (error)="onImgError($event, s.emoji)">
             <span class="opcion-nombre">{{ s.nombre }}</span>
             <div class="check" *ngIf="salchichaSeleccionada?.id === s.id">✓</div>
           </div>
         </div>
       </div>
 
-  
       <div class="seccion">
         <h2 class="seccion-titulo">
           <img src="assets/icons/ketchup.png" class="sec-icon" alt="salsas">
           Salsas
         </h2>
         <div class="grid-opciones">
-          <div
-            *ngFor="let s of salsas"
-            class="opcion"
-            [class.seleccionado]="estaSeleccionado(s.id, salsasSeleccionadas)"
-            (click)="toggleSalsa(s)"
-          >
-            <img [src]="s.icono" class="opcion-icon" [alt]="s.nombre"
-                 (error)="onImgError($event, s.emoji)">
+          <div *ngFor="let s of salsas" class="opcion" [class.seleccionado]="estaSeleccionado(s.id, salsasSeleccionadas)" (click)="toggleSalsa(s)">
+            <img [src]="s.icono" class="opcion-icon" [alt]="s.nombre" (error)="onImgError($event, s.emoji)">
             <span class="opcion-nombre">{{ s.nombre }}</span>
             <div class="check" *ngIf="estaSeleccionado(s.id, salsasSeleccionadas)">✓</div>
           </div>
         </div>
       </div>
 
-     
       <div class="seccion">
         <h2 class="seccion-titulo">
           <img src="assets/icons/pepino.png" class="sec-icon" alt="extras">
           Extras
         </h2>
         <div class="grid-opciones">
-          <div
-            *ngFor="let e of extras"
-            class="opcion"
-            [class.seleccionado]="estaSeleccionado(e.id, extrasSeleccionados)"
-            (click)="toggleExtra(e)"
-          >
-            <img [src]="e.icono" class="opcion-icon" [alt]="e.nombre"
-                 (error)="onImgError($event, e.emoji)">
+          <div *ngFor="let e of extras" class="opcion" [class.seleccionado]="estaSeleccionado(e.id, extrasSeleccionados)" (click)="toggleExtra(e)">
+            <img [src]="e.icono" class="opcion-icon" [alt]="e.nombre" (error)="onImgError($event, e.emoji)">
             <span class="opcion-nombre">{{ e.nombre }}</span>
             <div class="check" *ngIf="estaSeleccionado(e.id, extrasSeleccionados)">✓</div>
           </div>
         </div>
       </div>
-
     </div>
 
-  
     <div class="panel-preview">
       <div class="preview-titulo">
         <span class="spark"></span> Tu pancho <span class="spark"></span>
       </div>
 
-  
       <div class="nombre-preview" *ngIf="nombrePancho.trim()">
         "{{ nombrePancho }}"
       </div>
 
-   
       <div class="pancho-preview" [class.girando]="estaGirando">
         <ng-container *ngIf="panSeleccionado || salchichaSeleccionada; else placeholder">
-          <div class="prev-pan-top"
-               [style.background]="'linear-gradient(180deg, ' + colorPan + ' 0%, #c8781a 100%)'">
-          </div>
+          <div class="prev-pan-top" [style.background]="'linear-gradient(180deg, ' + colorPan + ' 0%, #c8781a 100%)'"></div>
           <div class="prev-extras" *ngIf="extrasSeleccionadosLista.length > 0">
-            <img *ngFor="let e of extrasSeleccionadosLista"
-                 [src]="e.icono" class="prev-extra-icon" [alt]="e.nombre"
-                 (error)="onImgError($event, e.emoji)">
+            <img *ngFor="let e of extrasSeleccionadosLista" [src]="e.icono" class="prev-extra-icon" [alt]="e.nombre" (error)="onImgError($event, e.emoji)">
           </div>
           <div class="prev-salsas" *ngIf="salsasSeleccionadasLista.length > 0">
-            <div *ngFor="let s of salsasSeleccionadasLista"
-                 class="prev-salsa-linea"
-                 [style.background]="s.color">
-            </div>
+            <div *ngFor="let s of salsasSeleccionadasLista" class="prev-salsa-linea" [style.background]="s.color"></div>
           </div>
-          <div class="prev-salchicha"
-               [style.background]="'linear-gradient(180deg, ' + colorSalchicha + ' 0%, #7a1f18 100%)'">
-          </div>
-          <div class="prev-pan-bottom"
-               [style.background]="'linear-gradient(180deg, ' + colorPan + ' 0%, #c8781a 100%)'">
-          </div>
+          <div class="prev-salchicha" [style.background]="'linear-gradient(180deg, ' + colorSalchicha + ' 0%, #7a1f18 100%)'"></div>
+          <div class="prev-pan-bottom" [style.background]="'linear-gradient(180deg, ' + colorPan + ' 0%, #c8781a 100%)'"></div>
         </ng-container>
         <ng-template #placeholder>
           <div class="prev-placeholder">
@@ -158,7 +104,20 @@
         </ng-template>
       </div>
 
-     
+      <div class="seccion" style="margin-top: 15px;">
+        <h2 class="seccion-titulo" style="justify-content: center;">
+          <img src="assets/icons/pancho2.png" class="sec-icon" alt="tamaño">
+          Tamaño (cm)
+        </h2>
+        <div class="tamanio-input-wrap" style="justify-content: center;">
+          <input class="input-tamanio" type="number" placeholder="Ej: 20" [(ngModel)]="tamanioCm" min="1" max="50">
+          <span class="tamanio-unidad">cm</span>
+        </div>
+        <div class="tamanio-preview" *ngIf="tamanioCm && tamanioCm > 0" style="text-align: center;">
+          <span class="tamanio-badge" [class]="tamanioBadgeClase">{{ tamanoTexto }}</span>
+        </div>
+      </div>
+
       <div class="ingredientes-seleccionados" *ngIf="puedeGuardar">
         <div class="tag" *ngIf="panSeleccionado">
           <img [src]="panSeleccionado.icono" class="tag-icon" [alt]="panSeleccionado.nombre">
@@ -178,17 +137,11 @@
         </div>
       </div>
 
-      <button
-        class="btn-guardar"
-        [class.disabled]="!puedeGuardar"
-        [disabled]="!puedeGuardar"
-        (click)="guardar()"
-      >
+      <button class="btn-guardar" [class.disabled]="!puedeGuardar" [disabled]="!puedeGuardar" (click)="guardar()">
         <img src="assets/icons/pancho.png" class="btn-icon" alt="guardar">
-        Guardar Pancho
+        Guardar Cambios
       </button>
       <p class="hint" *ngIf="!puedeGuardar">Completá el nombre, pan y salchicha</p>
     </div>
-
   </div>
 </div>

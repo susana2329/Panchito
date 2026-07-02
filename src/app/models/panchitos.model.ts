@@ -5,6 +5,6 @@ export interface Pancho {
   salchicha: string;
   ingredientes: string;
   precio: number;
-  tamaño: string;
+  tamano: string;
   disponible: boolean;
 }

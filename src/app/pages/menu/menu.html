@@ -1,8 +1,6 @@
 <div class="page">
-
   <div class="header">
     <button class="btn-back" routerLink="/">←</button>
-
     <div>
       <h1 class="titulo">Bienvenido al Menú de Panchito</h1>
       <p class="subtitulo">Gestioná los panchos registrados</p>
@@ -13,17 +11,20 @@
     <div class="menu">
       <h2 class="panel-titulo">🌭 Panchitos Registrados</h2>
     </div>
-
-    <input
-      class="search-input"
-      type="text"
-      placeholder="Buscar panchito..."
-      [(ngModel)]="buscarPancho"
-    />
+    <input class="search-input" type="text" placeholder="Buscar panchito..."
+           [(ngModel)]="buscarPancho"/>
   </div>
 
-  <div class="lista-panchos">
+  <div class="estado-carga" *ngIf="cargando">
+    <span>Cargando panchos...</span>
+  </div>
 
+  <div class="estado-error" *ngIf="errorCarga && !cargando">
+    <span>Error al cargar los panchos.</span>
+    <button (click)="cargarPanchos()">Reintentar</button>
+  </div>
+
+  <div class="lista-panchos" *ngIf="!cargando && !errorCarga">
     <div class="fila-encabezado">
       <div>Nombre</div>
       <div>Ingredientes</div>
@@ -31,37 +32,34 @@
       <div class="txt-accion">Acción</div>
     </div>
 
-    <div
-      *ngFor="let pancho of panchosFiltrados" class="fila">
+    <div class="sin-resultados" *ngIf="panchosFiltrados.length === 0">
+      No hay panchos para mostrar.
+    </div>
+
+    <div *ngFor="let pancho of panchosFiltrados" class="fila">
       <div>{{ pancho.nombre }}</div>
       <div>{{ pancho.ingredientes }}</div>
-      <div>{{ pancho.tamanio }}</div>
-
+      <div>{{ tamanoTexto(pancho.tamano) }}</div>
       <div class="acciones">
-        <button
-          class="btn-editar"[routerLink]="['/editar', pancho.panchoId]">✏️ Editar</button>
-        <button class="btn-eliminar" (click)="abrirConfirmacion(pancho.panchoId, pancho.nombre)">🗑 Eliminar </button>
+        <button class="btn-editar" [routerLink]="['/editar', pancho.panchoId]">✏️ Editar</button>
+        <button class="btn-eliminar" (click)="abrirConfirmacion(pancho.panchoId, pancho.nombre)">🗑 Eliminar</button>
       </div>
     </div>
   </div>
-
 </div>
 
 <div class="modal-overlay" *ngIf="mostrarAlertaDelete">
   <div class="modal-card">
-    <img src="/assets/pancho.png" alt="Advertencia" class="modal-img"/>
-
-    <h2>¿Estás realmente seguro de eliminar el pancho"{{ panchoSeleccionadoNombre }}"?</h2>
+    <img src="assets/pancho.png" alt="Advertencia" class="modal-img"/>
+    <h2>¿Estás realmente seguro de eliminar "{{ panchoSeleccionadoNombre }}"?</h2>
     <p>Esta acción quitará el panchito del sistema de inmediato.</p>
-
     <div class="modal-actions">
-      <button class="btn-confirmar-modal" (click)="confirmarEliminar()"> Sí, estoy seguro</button>
-
-      <button class="btn-cancelar-modal" (click)="cerrarAlerta()"> No, me arrepiento </button>
+      <button class="btn-confirmar-modal" (click)="confirmarEliminar()">Sí, estoy seguro</button>
+      <button class="btn-cancelar-modal" (click)="cerrarAlerta()">No, me arrepiento</button>
     </div>
   </div>
 </div>
 
 <div class="toast-exito" *ngIf="mostrarToast">
-  ✅ Se ha eliminado el panchito "{{ nombreEliminado }}" de tu menú.
+   Se eliminó "{{ nombreEliminado }}" del menú.
 </div>

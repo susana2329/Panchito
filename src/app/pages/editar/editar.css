@@ -259,7 +259,6 @@
 }
 .input-nombre::placeholder { color: #b09070; }
 
-/* ── Nombre en preview ── */
 .nombre-preview {
   font-family: 'Fredoka One', cursive;
   font-size: 16px;
@@ -274,3 +273,53 @@
   object-fit: contain;
   opacity: 0.4;
 }
+
+.tamanio-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-tamanio {
+  width: 120px;
+  padding: 12px 16px;
+  border: 2px solid #e0d5c0;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2d1a0e;
+  background: #fdf8f0;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+.input-tamanio:focus {
+  border-color: #C94831;
+  box-shadow: 0 0 0 3px rgba(201,72,49,0.12);
+}
+
+.tamanio-unidad {
+  font-size: 16px;
+  font-weight: 700;
+  color: #6b4226;
+}
+
+.tamanio-preview {
+  margin-top: 10px;
+}
+
+.tamanio-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.badge-xs { background: #95a5a6; }
+.badge-s  { background: #3498db; }
+.badge-m  { background: #2ecc71; }
+.badge-l  { background: #e67e22; }
+.badge-xl { background: #C94831; }

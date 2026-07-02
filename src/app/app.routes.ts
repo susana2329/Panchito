@@ -5,20 +5,20 @@ import { CrearComponent } from './pages/crear/crear';
 import { EditarComponent } from './pages/editar/editar';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: InicioComponent
-    },
-    {
-        path: 'menu',
-        component: MenuComponent
-    },
-    {
-        path: 'crear',
-        component: CrearComponent
-    },
-    {
-        path: 'editar/:id',
-        component: EditarComponent
-    }
+  {
+    path: '',
+    component: InicioComponent
+  },
+  {
+    path: 'menu',
+    component: MenuComponent
+  },
+  {
+    path: 'crear',
+    component: CrearComponent
+  },
+  {
+    path: 'editar/:id',
+    component: EditarComponent
+  },
 ];
